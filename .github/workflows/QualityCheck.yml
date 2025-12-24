@@ -60,13 +60,21 @@ jobs:
         --plot-config ".github/kibot/preflight.kibot.yaml" \
         --skip-pre drc \
         --invert-sel \
-        > test-results.log 2>&1
+        > GeneratedERC\test-results.log 2>&1
 
     - name: Retrieve results
       if: always() 
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.REPO_NAME_WITHOUT_PREFIX }}_ERC_Output
+        path: GeneratedERC
+        if-no-files-found: error
+
+    - name: debug ERC test-results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results.log
         path: GeneratedERC
         if-no-files-found: error
 
@@ -80,7 +88,7 @@ jobs:
         --plot-config .github/kibot/preflight.kibot.yaml \
         --skip-pre erc \
         --invert-sel \
-        >> test-results.log 2>&1
+        > GeneratedDRC\test-results.log 2>&1
 
     - name: Retrieve results
       if: always()
@@ -90,11 +98,12 @@ jobs:
         path: GeneratedDRC
         if-no-files-found: error
 
-    - name: debug test-results
+    - name: debug DRC test-results
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: test-results.log
+        path: GeneratedDRC
         if-no-files-found: error
 
     - name: Check for test failures
