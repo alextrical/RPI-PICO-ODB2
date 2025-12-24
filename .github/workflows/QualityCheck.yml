@@ -90,6 +90,13 @@ jobs:
         path: GeneratedDRC
         if-no-files-found: error
 
+    - name: debug test-results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results.log
+        if-no-files-found: error
+
     - name: Check for test failures
       run: |
         if grep -q "FAILED" test-results.log; then
