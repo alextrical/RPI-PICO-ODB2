@@ -30,19 +30,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Checkout submodules
-      uses: actions/checkout@v4
-      with:
-        repository: FutureProofHomes/Kicad-Libraries
-        token: ${{ secrets.ORG_WIDE_READ_TOKEN }}
-        path: Kicad-Libraries
-        persist-credentials: true
+    # - name: Checkout submodules
+    #   uses: actions/checkout@v4
+    #   with:
+    #     repository: owner/repo
+    #     token: ${{ secrets.ORG_WIDE_READ_TOKEN }}
+    #     path: repo
+    #     persist-credentials: true
 
-    - name: Remove "Internal-" prefix
-      run: |
-        REPO_NAME="${{ github.event.repository.name }}"
-        REPO_NAME_WITHOUT_PREFIX="${REPO_NAME#Internal-}"
-        echo "REPO_NAME_WITHOUT_PREFIX=$REPO_NAME_WITHOUT_PREFIX" >> $GITHUB_ENV
+    # - name: Remove "Internal-" prefix
+    #   run: |
+    #     REPO_NAME="${{ github.event.repository.name }}"
+    #     REPO_NAME_WITHOUT_PREFIX="${REPO_NAME#Internal-}"
+    #     echo "REPO_NAME_WITHOUT_PREFIX=$REPO_NAME_WITHOUT_PREFIX" >> $GITHUB_ENV
 
     # - name: Set variables in files
     #   id: SetOutputStrings

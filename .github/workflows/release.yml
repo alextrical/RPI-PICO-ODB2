@@ -53,20 +53,20 @@ jobs:
     steps:
       # Check out the files
     - uses: actions/checkout@v4
-      # Check out the submodules
-    - name: Checkout submodules
-      uses: actions/checkout@v4
-      with:
-        repository: FutureProofHomes/Kicad-Libraries
-        token: ${{ secrets.ORG_WIDE_READ_TOKEN }}
-        path: Kicad-Libraries
-        persist-credentials: true
+    #   # Check out the submodules
+    # - name: Checkout submodules
+    #   uses: actions/checkout@v4
+    #   with:
+    #     repository: owner/repo
+    #     token: ${{ secrets.ORG_WIDE_READ_TOKEN }}
+    #     path: repo
+    #     persist-credentials: true
 
-    - name: Remove "Internal-" prefix
-      run: |
-        REPO_NAME="${{ github.event.repository.name }}"
-        REPO_NAME_WITHOUT_PREFIX="${REPO_NAME#Internal-}"
-        echo "REPO_NAME_WITHOUT_PREFIX=$REPO_NAME_WITHOUT_PREFIX" >> $GITHUB_ENV
+    # - name: Remove "Internal-" prefix
+    #   run: |
+    #     REPO_NAME="${{ github.event.repository.name }}"
+    #     REPO_NAME_WITHOUT_PREFIX="${REPO_NAME#Internal-}"
+    #     echo "REPO_NAME_WITHOUT_PREFIX=$REPO_NAME_WITHOUT_PREFIX" >> $GITHUB_ENV
 
     # Get the version of the GitHub release for use later. This is only valid
     # when run in a release context
@@ -166,9 +166,9 @@ jobs:
   #     - name: Checkout submodules
   #       uses: actions/checkout@v4
   #       with:
-  #         repository: FutureProofHomes/Kicad-Libraries
+  #         repository: owner/repo
   #         token: ${{ secrets.ORG_WIDE_READ_TOKEN }}
-  #         path: Kicad-Libraries
+  #         path: repo
   #         persist-credentials: true
 
   #   - name: Remove "Internal-" prefix
