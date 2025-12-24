@@ -59,7 +59,8 @@ jobs:
         --board-file "${{ env.REPO_NAME_WITHOUT_PREFIX }}.kicad_pcb" \
         --plot-config ".github/kibot/preflight.kibot.yaml" \
         --skip-pre drc \
-        --invert-sel
+        --invert-sel \
+        > test-results.log 2>&1
 
     - name: Retrieve results
       if: always() 
@@ -78,7 +79,8 @@ jobs:
         --board-file "${{ env.REPO_NAME_WITHOUT_PREFIX }}.kicad_pcb" \
         --plot-config .github/kibot/preflight.kibot.yaml \
         --skip-pre erc \
-        --invert-sel
+        --invert-sel \
+        >> test-results.log 2>&1
 
     - name: Retrieve results
       if: always()
