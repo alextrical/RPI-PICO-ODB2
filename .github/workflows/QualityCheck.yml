@@ -60,7 +60,7 @@ jobs:
         --plot-config ".github/kibot/preflight.kibot.yaml" \
         --skip-pre drc \
         --invert-sel \
-         2>&1 | tee GeneratedERC/test-results.log
+         2>&1 | tee ERCtest-results.log
 
     - name: Retrieve results
       if: always() 
@@ -88,7 +88,7 @@ jobs:
         --plot-config .github/kibot/preflight.kibot.yaml \
         --skip-pre erc \
         --invert-sel \
-         2>&1 | tee GeneratedDRC/test-results.log
+         2>&1 | tee DRC-results.log
 
     - name: Retrieve results
       if: always()
@@ -98,9 +98,16 @@ jobs:
         path: GeneratedDRC
         if-no-files-found: error
 
-    - name: Check for test failures
+    - name: Check for ERC test failures
       run: |
-        if grep -q "FAILED" test-results.log; then
+        if grep -q "FAILED" ERC-results.log; then
+          echo "Tests failed"
+          exit 1
+        fi
+
+    - name: Check for DRC test failures
+      run: |
+        if grep -q "FAILED" DRC-results.log; then
           echo "Tests failed"
           exit 1
         fi
