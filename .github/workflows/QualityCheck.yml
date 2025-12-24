@@ -92,16 +92,14 @@ jobs:
 
     - name: Check for ERC test failures
       run: |
-        cat ERC-results.log
-        if grep -q "FAILED" ERC-results.log; then
+        if grep -q "ERROR" ERC-results.log; then
           echo "Tests failed"
           exit 1
         fi
 
     - name: Check for DRC test failures
       run: |
-        cat DRC-results.log
-        if grep -q "FAILED" DRC-results.log; then
+        if grep -q "ERROR" DRC-results.log; then
           echo "Tests failed"
           exit 1
         fi
