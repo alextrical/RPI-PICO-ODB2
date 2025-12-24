@@ -60,7 +60,7 @@ jobs:
         --plot-config ".github/kibot/preflight.kibot.yaml" \
         --skip-pre drc \
         --invert-sel \
-        > GeneratedERC\test-results.log 2>&1
+         2>&1 | tee GeneratedERC/test-results.log
 
     - name: Retrieve results
       if: always() 
@@ -88,21 +88,13 @@ jobs:
         --plot-config .github/kibot/preflight.kibot.yaml \
         --skip-pre erc \
         --invert-sel \
-        > GeneratedDRC\test-results.log 2>&1
+         2>&1 | tee GeneratedDRC/test-results.log
 
     - name: Retrieve results
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.REPO_NAME_WITHOUT_PREFIX }}_DRC_Output
-        path: GeneratedDRC
-        if-no-files-found: error
-
-    - name: debug DRC test-results
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-results.log
         path: GeneratedDRC
         if-no-files-found: error
 
